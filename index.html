@@ -1,9 +1,26 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title></title>
+        <meta charset="utf-8">
+        <title>Leanid Baronin</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
         <h1>Leanid Baronin</h1>
+        <div>Page fully loaded in <span id="performance" /></div>
+        <script>
+            window.onload = function () {
+                setTimeout(function () {
+                    const navigationTimings = performance.getEntriesByType('navigation');
+                    if (navigationTimings) {
+                        const navigationTiming = navigationTimings[0];
+                        const requestStart = navigationTiming.requestStart;
+                        const loadEventEnd = navigationTiming.loadEventEnd;
+                        const performanceSpan = document.getElementById('performance');
+                        performanceSpan.innerHTML = `${Math.ceil(loadEventEnd - requestStart)} ms`;
+                    }
+                }, 0)
+            }
+        </script>
     </body>
 </html>
